@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Date;
+import java.util.Objects;
 
 @Entity
 public class User {
@@ -12,15 +12,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Date date;
-
     private String name;
 
-    private String email;
+    public User() {
+    }
 
-    private Long uplink;
-
-    private Long downlink;
+    public User(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -28,14 +27,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getName() {
@@ -46,27 +37,17 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    @Override
+    public int hashCode() {
 
-    public Long getUplink() {
-        return uplink;
-    }
-
-    public void setUplink(Long uplink) {
-        this.uplink = uplink;
-    }
-
-    public Long getDownlink() {
-        return downlink;
-    }
-
-    public void setDownlink(Long downlink) {
-        this.downlink = downlink;
+        return Objects.hash(id);
     }
 }

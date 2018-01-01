@@ -4,29 +4,24 @@ import com.vitkulov.tests.Test_2.model.User;
 import com.vitkulov.tests.Test_2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.sql.Date;
-import java.util.Calendar;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
-@RequestMapping(path = "/user")
 public class MainController {
 
     @Autowired
     private UserRepository userRepository;
 
     @PostMapping(path = "/create")
-    public @ResponseBody
-    String addNewUser(@RequestBody User user) {
-        user.setDate(new Date(Calendar.getInstance().getTimeInMillis()));
+    public String addNewUser(@RequestBody User user) {
         userRepository.save(user);
         return "Saved";
     }
 
-    @GetMapping(path = "/all")
-    public @ResponseBody
-    Iterable<User> getAllUsers() {
-        return userRepository.findAll();
+    @GetMapping
+    public String getIndex() {
+        return "index";
     }
 }
