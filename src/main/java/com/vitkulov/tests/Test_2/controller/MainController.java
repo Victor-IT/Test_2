@@ -35,7 +35,36 @@ public class MainController {
 
     @PostMapping("/user/add")
     public String addUser(@ModelAttribute User user) {
+        userRepository.save(user);
         System.out.println(user.getName());
+        return "redirect:/";
+    }
+
+    @GetMapping("/user/new")
+    public String newUser(Model model) {
+        model.addAttribute("user", new User());
+        return "newUser";
+    }
+
+    @PostMapping("/user/update")
+    public String updateUser(@ModelAttribute User user) {
+        System.out.println(user.getId() + " " + user.getName());
+        userRepository.save(user);
+        return "redirect:/user/" + user.getId();
+    }
+
+    @PostMapping("/user/edit")
+    public String editUser(Model model, @ModelAttribute User user) {
+        System.out.println(user.getId() + " " + user.getName());
+        User result = userRepository.findOne(user.getId());
+        model.addAttribute("user", result);
+        return "edit";
+    }
+
+    @PostMapping("/user/delete")
+    public String deleteUser(@ModelAttribute User user) {
+        System.out.println(user.getId());
+        userRepository.delete(user);
         return "redirect:/";
     }
 }

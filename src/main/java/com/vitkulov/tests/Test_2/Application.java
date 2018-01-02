@@ -17,7 +17,7 @@ public class Application {
     @Bean
     public CommandLineRunner init(UserRepository userRepository) {
         return strings -> {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 1; i < 21; i++) {
                 userRepository.save(new User("Пользователь " + i));
             }
         };

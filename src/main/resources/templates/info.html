@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>User Info</title>
 </head>
 <body>
 <h1>User Info</h1>
+<table th:object="${user}" border="1">
+    <tr>
+        <td th:text="*{id}">UserID</td>
+        <td th:text="*{name}">UserName</td>
+        <td>
+            <form action="/user/edit" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <input type="submit" value="Редактировать"/>
+            </form>
+        </td>
+        <td>
+            <form action="/user/delete" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <input type="submit" value="Удалить"/>
+            </form>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

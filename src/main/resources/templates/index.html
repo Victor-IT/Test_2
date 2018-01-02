@@ -5,7 +5,8 @@
     <title>Index</title>
 </head>
 <body>
-<h1>Hello World!</h1>
+<h1>User List</h1>
+<a href="/user/new"><button>Add new user</button></a>
 <table border="1">
     <tr th:each="user : ${users}">
         <td th:text="${user.id}">1</td>
@@ -13,9 +14,5 @@
     </tr>
 </table>
 
-<form th:object="${user}" action="/user/add" method="post">
-    <input type="text" th:field="*{name}"/>
-    <input type="submit"/>
-</form>
 </body>
 </html>
