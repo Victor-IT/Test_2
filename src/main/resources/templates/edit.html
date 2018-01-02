@@ -5,7 +5,7 @@
     <title>Edit User</title>
 </head>
 <body>
-<form th:object="${user}" action="/user/update" method="post">
+<form th:object="${user}" action="/user/edit" method="post">
     <label>Новое имя</label>
     <input type="hidden" th:field="*{id}"/>
     <input type="text" th:field="*{name}"/>
