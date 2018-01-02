@@ -19,8 +19,6 @@ public class MainController {
     @GetMapping
     public String getIndex(Model model) {
         model.addAttribute("users", userRepository.findAll());
-        User user = new User("Vasya");
-        model.addAttribute("user", user);
         return "index";
     }
 
@@ -29,14 +27,12 @@ public class MainController {
         Long userId = Long.parseLong(id);
         User user = userRepository.findOne(userId);
         model.addAttribute("user", user);
-        System.out.println(id);
         return "info";
     }
 
     @PostMapping("/user/add")
     public String addUser(@ModelAttribute User user) {
         userRepository.save(user);
-        System.out.println(user.getName());
         return "redirect:/";
     }
 
@@ -48,23 +44,22 @@ public class MainController {
 
     @PostMapping("/user/update")
     public String updateUser(@ModelAttribute User user) {
-        System.out.println(user.getId() + " " + user.getName());
         userRepository.save(user);
         return "redirect:/user/" + user.getId();
     }
 
-    @PostMapping("/user/edit")
-    public String editUser(Model model, @ModelAttribute User user) {
-        System.out.println(user.getId() + " " + user.getName());
-        User result = userRepository.findOne(user.getId());
+    @GetMapping("/user/edit/{id}")
+    public String editUser(Model model, @PathVariable(name = "id") String id) {
+        Long userID = Long.parseLong(id);
+        User result = userRepository.findOne(userID);
         model.addAttribute("user", result);
         return "edit";
     }
 
-    @PostMapping("/user/delete")
-    public String deleteUser(@ModelAttribute User user) {
-        System.out.println(user.getId());
-        userRepository.delete(user);
+    @GetMapping("/user/delete/{id}")
+    public String deleteUser(@PathVariable(name = "id") String id) {
+        Long userID = Long.parseLong(id);
+        userRepository.delete(userID);
         return "redirect:/";
     }
 }
