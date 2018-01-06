@@ -15,6 +15,14 @@
 </head>
 <body>
 
+<div th:fragment="nav">
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a href="/">Home</a></li>
+        <li role="presentation"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+    </ul>
+</div>
+
 <div class="container" th:fragment="container(h1)">
     <h1 th:replace="${h1}">H1 header</h1>
     <div class="row">

@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout :: head(~{::title},~{})">
-    <title>User Info</title>
+    <title>Информация о пользователе</title>
 </head>
 <body>
+<div th:replace="layout :: nav">Nav</div>
 
 <div th:replace="layout :: container(~{::h1})">
-    <h1>User InfoMOD</h1>
+    <h1>Информация о пользователе</h1>
     <div id="content">
         <table class="table table-bordered" th:object="${user}" border="1">
             <tbody>
             <tr>
-                <td th:text="*{id}">UserID</td>
-                <td th:text="*{name}">UserName</td>
+                <td width="10%" th:text="*{id}">UserID</td>
+                <td width="90%" th:text="*{name}">UserName</td>
                 <td>
                     <a th:href="'/user/edit/' + *{id}">
-                        <button>Редактировать</button>
+                        <button class="btn btn-default">Редактировать</button>
                     </a>
                 </td>
                 <td>
                     <a th:href="'/user/delete/' + *{id}">
-                        <button>Удалить</button>
+                        <button class="btn btn-danger">Удалить</button>
                     </a>
                 </td>
             </tr>
