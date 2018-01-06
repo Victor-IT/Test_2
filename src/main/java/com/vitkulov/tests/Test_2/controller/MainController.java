@@ -16,10 +16,10 @@ public class MainController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping
+    @GetMapping("/")
     public String getIndex(Model model) {
         model.addAttribute("users", userRepository.findAll());
-        return "index";
+        return "views/index";
     }
 
     @GetMapping("/user/{id}")
@@ -27,7 +27,7 @@ public class MainController {
         Long userId = Long.parseLong(id);
         User user = userRepository.findOne(userId);
         model.addAttribute("user", user);
-        return "info";
+        return "views/info";
     }
 
     @PostMapping("/user/add")
@@ -39,7 +39,7 @@ public class MainController {
     @GetMapping("/user/new")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
-        return "newUser";
+        return "views/new";
     }
 
     @PostMapping("/user/edit")
@@ -53,7 +53,7 @@ public class MainController {
         Long userID = Long.parseLong(id);
         User result = userRepository.findOne(userID);
         model.addAttribute("user", result);
-        return "edit";
+        return "views/edit";
     }
 
     @GetMapping("/user/delete/{id}")
