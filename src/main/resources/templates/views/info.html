@@ -1,34 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: head(~{::title},~{})">
-    <title>Информация о пользователе</title>
-</head>
-<body>
-<div th:replace="layout :: nav">Nav</div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: wrapper(~{::title},~{})">
 
-<div th:replace="layout :: container(~{::h1})">
-    <h1>Информация о пользователе</h1>
-    <div id="content">
-        <table class="table table-bordered" th:object="${user}" border="1">
-            <tbody>
-            <tr>
-                <td width="10%" th:text="*{id}">UserID</td>
-                <td width="90%" th:text="*{name}">UserName</td>
-                <td>
-                    <a th:href="'/user/edit/' + *{id}">
-                        <button class="btn btn-default">Редактировать</button>
-                    </a>
-                </td>
-                <td>
-                    <a th:href="'/user/delete/' + *{id}">
-                        <button class="btn btn-danger">Удалить</button>
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<title>Информация о пользователе</title>
+
+<div id="content">
+    <table class="table table-bordered" th:object="${user}" border="1">
+        <tbody>
+        <tr>
+            <td width="10%" th:text="*{id}">UserID</td>
+            <td width="90%" th:text="*{name}">UserName</td>
+            <td>
+                <a th:href="'/user/edit/' + *{id}">
+                    <button class="btn btn-default">Редактировать</button>
+                </a>
+            </td>
+            <td>
+                <a th:href="'/user/delete/' + *{id}">
+                    <button class="btn btn-danger">Удалить</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
-</body>
 </html>

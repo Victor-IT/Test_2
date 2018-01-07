@@ -1,20 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: head(~{::title},~{})">
-    <title>Создать нового пользователя</title>
-</head>
-<body>
-<div th:replace="layout :: nav">Nav</div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: wrapper(~{::title},~{})">
 
-<div th:replace="layout :: container(~{::h1})">
-    <h1>Создать нового пользователя</h1>
-    <div id="content">
-        <form class="form-inline" th:object="${user}" action="/user/add" method="post">
-            <label for="formInputName1">Имя: </label>
-            <input type="text" class="form-control" placeholder="Введите имя" id="formInputName1" th:field="*{name}"/>
-            <button type="submit" class="btn btn-primary">Создать</button>
-        </form>
-    </div>
+<title>Создать нового пользователя</title>
+
+<div id="content">
+    <form class="form-inline" th:object="${user}" action="/user/add" method="post">
+        <label for="formInputName1">Имя: </label>
+        <input type="text" class="form-control" placeholder="Введите имя" id="formInputName1" th:field="*{name}"/>
+        <button type="submit" class="btn btn-primary">Создать</button>
+    </form>
 </div>
-</body>
+
 </html>

@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: header(~{::title},~{})">
-    <title>Getting Started: Serving Web Content</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: wrapper(~{::title},~{})">
 
-<h1 th:text="'Hello, ' + ${name} + '!'" ></h1>
+<title>Getting Started: Serving Web Content</title>
 
-</body>
+<div id="content">
+    <h1 th:text="'Hello, ' + ${name} + '!'"></h1>
+</div>
+
 </html>
