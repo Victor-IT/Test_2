@@ -57,7 +57,7 @@ public class MainController {
     public String updateUser(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("user", userDto);
+            model.addAttribute("userDto", userDto);
             return "views/edit";
         }
 
@@ -71,7 +71,7 @@ public class MainController {
     public String editUser(Model model, @PathVariable(name = "id") String id) {
         Long userID = Long.parseLong(id);
         User result = userRepository.findOne(userID);
-        model.addAttribute("user", result);
+        model.addAttribute("userDto", result);
         return "views/edit";
     }
 

@@ -4,7 +4,7 @@
 <title>Профиль пользователя</title>
 
 <div id="content">
-    <form class="form-inline" th:object="${user}" th:action="@{/user/edit}" method="post">
+    <form class="form-inline" th:object="${userDto}" th:action="@{/user/edit}" method="post">
         <div class="form-group">
             <label for="formInputName1">Новое имя</label>
             <input type="hidden" th:field="*{id}"/>
