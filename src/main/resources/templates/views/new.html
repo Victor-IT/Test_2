@@ -4,10 +4,11 @@
 <title>Создать нового пользователя</title>
 
 <div id="content">
-    <form class="form-inline" th:object="${user}" action="/user/add" method="post">
+    <form class="form-inline" th:object="${userDto}" th:action="@{/user/new}" method="post">
         <label for="formInputName1">Имя: </label>
         <input type="text" class="form-control" placeholder="Введите имя" id="formInputName1" th:field="*{name}"/>
         <button type="submit" class="btn btn-primary">Создать</button>
+        <span class="help-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
     </form>
 </div>
 
