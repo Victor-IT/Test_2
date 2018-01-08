@@ -1,14 +1,13 @@
 package com.vitkulov.tests.Test_2.dto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import com.vitkulov.tests.Test_2.validation.Name;
 
 public class UserDto {
 
     private Long id;
 
-    @NotNull
-    @Size(min = 2, max = 30)
+    @Name
     private String name;
 
     public UserDto() {
