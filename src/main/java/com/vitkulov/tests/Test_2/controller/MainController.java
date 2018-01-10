@@ -1,9 +1,13 @@
 package com.vitkulov.tests.Test_2.controller;
 
+import com.vitkulov.tests.Test_2.dto.PageWrapper;
 import com.vitkulov.tests.Test_2.dto.UserDto;
 import com.vitkulov.tests.Test_2.model.User;
 import com.vitkulov.tests.Test_2.repository.UserRepository;
+import com.vitkulov.tests.Test_2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,10 +23,15 @@ public class MainController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
-    public String getIndex(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+    public String getAll(Model model, Pageable pageable) {
+        Page<User> userPage = userService.getAllUsers(pageable);
+        PageWrapper<User> page = new PageWrapper<>(userPage, "/");
+        model.addAttribute("users", page.getContent());
+        model.addAttribute("page", page);
         return "views/index";
     }
 

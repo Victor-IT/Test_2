@@ -11,6 +11,6 @@ public class NameValidator implements ConstraintValidator<Name, String> {
 
     @Override
     public boolean isValid(String nameField, ConstraintValidatorContext constraintValidatorContext) {
-        return nameField != null && nameField.matches("^[a-zA-Zа-яА-Я]+$") && (nameField.length() > 3) && (nameField.length() < 30);
+        return nameField != null && nameField.matches("^[a-zA-Zа-яА-Я]+$") && (nameField.length() > 2) && (nameField.length() < 30);
     }
 }
