@@ -1,5 +1,6 @@
 package com.vitkulov.tests.Test_2.service;
 
+import com.vitkulov.tests.Test_2.dto.UserDto;
 import com.vitkulov.tests.Test_2.model.User;
 import com.vitkulov.tests.Test_2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,34 @@ public class UserServiceImpl implements UserService {
     public Page<User> getAllUsers(Pageable pageable) {
         Page<User> userList = userRepository.findAll(pageable);
         return userList;
+    }
+
+    @Override
+    public User findOneById(Long userID) {
+        return userRepository.findOne(userID);
+    }
+
+    @Override
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUserById(Long userID) {
+        userRepository.delete(userID);
+    }
+
+    @Override
+    public void saveNewUser(UserDto userDto) {
+        User user = new User();
+        user.setName(userDto.getName()); //TODO: нужен автоматический конвертер
+        userRepository.save(user);
+    }
+
+    @Override
+    public void updateUser(UserDto userDto) {
+        User user = userRepository.findOne(userDto.getId());
+        user.setName(userDto.getName());
+        userRepository.save(user);
     }
 }
