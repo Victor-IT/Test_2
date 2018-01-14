@@ -33,11 +33,9 @@
             </li>
         </ul>
     </div>
-    <div style="margin-bottom: 5px" class="btn-group" role="group">
+    <div style="margin-top: 20px; float:right;" class="btn-group" role="group">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-            Dropdown
-            <span class="caret"></span>
+                aria-expanded="false" th:text="'Размер списка: ' + ${page.size}"> Количество <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
             <li><a th:href="@{${page.url}(page=~{},size=5)}"><span>5</span></a></li>
