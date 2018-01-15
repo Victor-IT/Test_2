@@ -1,9 +1,8 @@
 package com.vitkulov.tests.Test_2.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +12,12 @@ public class User {
     private Long id;
 
     private String name;
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<DataRecord> records = new ArrayList<>();
 
     public User() {
     }
@@ -37,6 +42,20 @@ public class User {
         this.name = name;
     }
 
+    public List<DataRecord> getRecords() {
+        return records;
+    }
+
+    public void addDataRecord(DataRecord dataRecord) {
+        records.add(dataRecord);
+        dataRecord.setUser(this);
+    }
+
+    public void removeDataRecord(DataRecord dataRecord) {
+        records.remove(dataRecord);
+        dataRecord.setUser(null);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,7 +66,6 @@ public class User {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id);
     }
 }
