@@ -20,6 +20,14 @@
                 </a>
             </td>
         </tr>
+        <tr>
+            <th colspan="2">Скачал</th>
+            <th colspan="2">Загрузил</th>
+        </tr>
+        <tr th:each="record : ${user.getRecords()}">
+            <td colspan="2" th:text="${record.getDownlink()}">Скачал</td>
+            <td colspan="2" th:text="${record.getUplink()}">Загрузил</td>
+        </tr>
         </tbody>
     </table>
 </div>
