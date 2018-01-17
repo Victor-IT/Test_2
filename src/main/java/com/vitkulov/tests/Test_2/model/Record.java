@@ -1,14 +1,17 @@
 package com.vitkulov.tests.Test_2.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Entity
-public class DataRecord {
+public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private LocalDateTime date;
     private Long uplink;
     private Long downlink;
 
@@ -16,10 +19,18 @@ public class DataRecord {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public DataRecord() {
+    public Record() {
     }
 
-    public DataRecord(Long uplink, Long downlink, User user) {
+    public Record(Long uplink, Long downlink, User user) {
+        this.date = LocalDateTime.now();
+        this.uplink = uplink;
+        this.downlink = downlink;
+        this.user = user;
+    }
+
+    public Record(LocalDateTime date, Long uplink, Long downlink, User user) {
+        this.date = date;
         this.uplink = uplink;
         this.downlink = downlink;
         this.user = user;
@@ -27,6 +38,15 @@ public class DataRecord {
 
     public Long getId() {
         return id;
+    }
+
+    public String getDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm:ss");
+        return date.format(formatter);
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     public Long getUplink() {
@@ -57,13 +77,15 @@ public class DataRecord {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DataRecord that = (DataRecord) o;
+        Record that = (Record) o;
         return Objects.equals(id, that.id) &&
+                Objects.equals(date, that.date) &&
                 Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user);
+
+        return Objects.hash(id, date, user);
     }
 }

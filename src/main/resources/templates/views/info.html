@@ -7,8 +7,7 @@
     <table class="table table-bordered" th:object="${user}" border="1">
         <tbody>
         <tr>
-            <td width="10%" th:text="*{id}">UserID</td>
-            <td width="90%" th:text="*{name}">UserName</td>
+            <td align="center" colspan="2" width="100%" th:style="'font-weight:bold; text-align:center; vertical-align:middle;'" th:text="*{name}">UserName</td>
             <td>
                 <a th:href="'/user/edit/' + *{id}">
                     <button class="btn btn-default">Редактировать</button>
@@ -21,12 +20,16 @@
             </td>
         </tr>
         <tr>
-            <th colspan="2">Скачал</th>
-            <th colspan="2">Загрузил</th>
+            <th>№</th>
+            <th>Дата</th>
+            <th>Скачал</th>
+            <th>Загрузил</th>
         </tr>
-        <tr th:each="record : ${user.getRecords()}">
-            <td colspan="2" th:text="${record.getDownlink()}">Скачал</td>
-            <td colspan="2" th:text="${record.getUplink()}">Загрузил</td>
+        <tr th:each="record : ${user.getRecordList()}">
+            <td th:text="${record.getId()}">№</td>
+            <td th:text="${record.getDate()}">Дата</td>
+            <td th:text="${record.getDownlink()}">Скачал</td>
+            <td th:text="${record.getUplink()}">Загрузил</td>
         </tr>
         </tbody>
     </table>

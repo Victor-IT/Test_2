@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -27,7 +28,12 @@ public class MainController {
     public String getAll(Model model, Pageable pageable) {
         Page<User> userPage = userService.getAllUsers(pageable);
         PageWrapper<User> page = new PageWrapper<>(userPage, "/");
-        model.addAttribute("users", page.getContent());
+
+        //пока для примера вывод на главной странице таблицы с общими суммами
+        List<User> pageContent = page.getContent();
+        List<UserDto> users = userService.getSumRecords(pageContent);
+
+        model.addAttribute("users", users);
         model.addAttribute("page", page);
         return "views/index";
     }

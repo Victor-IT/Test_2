@@ -15,8 +15,8 @@
         <tr>
             <th>№</th>
             <th>Имя</th>
-            <th>Последняя скачка</th>
-            <th>Последняя загрузка</th>
+            <th>Всего скачал</th>
+            <th>Всего загрузил</th>
         </tr>
         </thead>
         <tr th:each="user : ${users}">
@@ -25,10 +25,10 @@
                 <a th:text="${user.name}" th:href="'/user/'+${user.id}" href="/user/1">Пользователь</a>
             </td>
             <td width="30%">
-                <span th:text="${user.records.get(user.records.size()-1).getDownlink()}">Скачал</span>
+                <span th:text="${user.record.getDownlink()}">Скачал</span>
             </td>
             <td width="30%">
-                <span th:text="${user.records.get(user.records.size()-1).getUplink()}">Загрузил</span>
+                <span th:text="${user.record.getUplink()}">Загрузил</span>
             </td>
         </tr>
     </table>

@@ -17,7 +17,7 @@ public class User {
             mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<DataRecord> records = new ArrayList<>();
+    private List<Record> recordList = new ArrayList<>();
 
     public User() {
     }
@@ -42,18 +42,18 @@ public class User {
         this.name = name;
     }
 
-    public List<DataRecord> getRecords() {
-        return records;
+    public List<Record> getRecordList() {
+        return recordList;
     }
 
-    public void addDataRecord(DataRecord dataRecord) {
-        records.add(dataRecord);
-        dataRecord.setUser(this);
+    public void addRecord(Record record) {
+        recordList.add(record);
+        record.setUser(this);
     }
 
-    public void removeDataRecord(DataRecord dataRecord) {
-        records.remove(dataRecord);
-        dataRecord.setUser(null);
+    public void removeRecord(Record record) {
+        recordList.remove(record);
+        record.setUser(null);
     }
 
     @Override
@@ -61,11 +61,13 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id);
+        return Objects.equals(id, user.id) &&
+                Objects.equals(name, user.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+
+        return Objects.hash(id, name);
     }
 }

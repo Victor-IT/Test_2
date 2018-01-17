@@ -1,6 +1,7 @@
 package com.vitkulov.tests.Test_2.dto;
 
 
+import com.vitkulov.tests.Test_2.model.Record;
 import com.vitkulov.tests.Test_2.validation.Name;
 
 public class UserDto {
@@ -9,6 +10,8 @@ public class UserDto {
 
     @Name
     private String name;
+
+    private Record record;
 
     public UserDto() {
     }
@@ -31,6 +34,14 @@ public class UserDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Record getRecord() {
+        return record;
+    }
+
+    public void setRecord(Record record) {
+        this.record = record;
     }
 
     @Override
