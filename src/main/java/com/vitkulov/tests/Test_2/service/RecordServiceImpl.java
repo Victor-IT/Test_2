@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.List;
+
+import static com.vitkulov.tests.Test_2.service.RecordSpecifications.getRecordsByUserId;
 
 @Service
 public class RecordServiceImpl implements RecordService {
@@ -23,15 +21,10 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public List<Record> findByIdCriteria(String id) {
-
-        Specification<Record> specification = new Specification<Record>() {
-            @Override
-            public Predicate toPredicate(Root<Record> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                return criteriaBuilder.like(criteriaBuilder.upper(root.get("uplink")), "512");
-            }
-        };
-
+    public List<Record> findByIdCriteria(Long id) {
+        Specification<Record> specification = getRecordsByUserId(id);
         return recordRepository.findAll(specification);
     }
+
+
 }
