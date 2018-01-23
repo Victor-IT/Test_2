@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface RecordService {
 
-    List<Record> findByIdCriteria(Long id);
+    List<Record> findRecordsByCriteria(Long id);
 }

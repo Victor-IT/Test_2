@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.vitkulov.tests.Test_2.service.RecordSpecifications.getRecordsByUserId;
+import static com.vitkulov.tests.Test_2.service.RecordSpecifications.hasUserId;
 
 @Service
 public class RecordServiceImpl implements RecordService {
@@ -21,8 +21,8 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public List<Record> findByIdCriteria(Long id) {
-        Specification<Record> specification = getRecordsByUserId(id);
+    public List<Record> findRecordsByCriteria(Long id) {
+        Specification<Record> specification = hasUserId(id);
         return recordRepository.findAll(specification);
     }
 

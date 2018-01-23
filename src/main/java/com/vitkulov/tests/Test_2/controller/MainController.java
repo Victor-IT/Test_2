@@ -48,7 +48,7 @@ public class MainController {
         User user = userService.findOneById(userID);
         model.addAttribute("user", user);
 
-        List<Record> recordList = recordService.findByIdCriteria(userID);
+        List<Record> recordList = recordService.findRecordsByCriteria(userID);
         model.addAttribute("recordList", recordList);
         return "views/info";
     }

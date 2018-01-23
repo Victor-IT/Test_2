@@ -13,7 +13,7 @@ final class RecordSpecifications {
     private RecordSpecifications() {
     }
 
-    static Specification<Record> getRecordsByUserId(Long id) {
+    static Specification<Record> hasUserId(Long id) {
         return new Specification<Record>() {
             @Override
             public Predicate toPredicate(Root<Record> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
