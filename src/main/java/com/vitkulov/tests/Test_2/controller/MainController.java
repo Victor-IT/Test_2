@@ -2,7 +2,9 @@ package com.vitkulov.tests.Test_2.controller;
 
 import com.vitkulov.tests.Test_2.dto.PageWrapper;
 import com.vitkulov.tests.Test_2.dto.UserDto;
+import com.vitkulov.tests.Test_2.model.Record;
 import com.vitkulov.tests.Test_2.model.User;
+import com.vitkulov.tests.Test_2.service.RecordService;
 import com.vitkulov.tests.Test_2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,8 @@ public class MainController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RecordService recordService;
 
     @GetMapping("/")
     public String getAll(Model model, Pageable pageable) {
@@ -43,6 +47,10 @@ public class MainController {
         Long userID = Long.parseLong(id);
         User user = userService.findOneById(userID);
         model.addAttribute("user", user);
+
+        List<Record> recordList= recordService.findByIdCriteria(id);
+        model.addAttribute("recordList", recordList);
+
         return "views/info";
     }
 

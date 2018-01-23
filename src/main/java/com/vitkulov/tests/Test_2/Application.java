@@ -27,6 +27,7 @@ public class Application {
                 User user = new User("Пользователь " + i);
                 for (int j = 1; j < 11; j++) {
                     user.addRecord(new Record(date.plusDays(j), 1024L, 2048L, user));
+                    user.addRecord(new Record(date.plusDays(j), 512L, 2048L, user));
                 }
                 userRepository.save(user);
             }

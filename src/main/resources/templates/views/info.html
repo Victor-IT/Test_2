@@ -25,7 +25,8 @@
             <th>Скачал</th>
             <th>Загрузил</th>
         </tr>
-        <tr th:each="record : ${user.getRecordList()}">
+        <!--<tr th:each="record : ${user.getRecordList()}">-->
+        <tr th:each="record : ${recordList}">
             <td th:text="${record.getId()}">№</td>
             <td th:text="${record.getDate()}">Дата</td>
             <td th:text="${record.getDownlink()}">Скачал</td>
