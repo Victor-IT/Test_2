@@ -1,7 +1,7 @@
 package com.vitkulov.tests.Test_2.model;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDateTime date;
+    private LocalDate date;
     private Long uplink;
     private Long downlink;
 
@@ -23,13 +23,13 @@ public class Record {
     }
 
     public Record(Long uplink, Long downlink, User user) {
-        this.date = LocalDateTime.now();
+        this.date = LocalDate.now();
         this.uplink = uplink;
         this.downlink = downlink;
         this.user = user;
     }
 
-    public Record(LocalDateTime date, Long uplink, Long downlink, User user) {
+    public Record(LocalDate date, Long uplink, Long downlink, User user) {
         this.date = date;
         this.uplink = uplink;
         this.downlink = downlink;
@@ -41,11 +41,11 @@ public class Record {
     }
 
     public String getDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return date.format(formatter);
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
