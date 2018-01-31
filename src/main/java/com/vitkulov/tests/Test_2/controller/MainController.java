@@ -1,5 +1,6 @@
 package com.vitkulov.tests.Test_2.controller;
 
+import com.vitkulov.tests.Test_2.dto.FilterFormDto;
 import com.vitkulov.tests.Test_2.dto.PageWrapper;
 import com.vitkulov.tests.Test_2.dto.UserDto;
 import com.vitkulov.tests.Test_2.model.Record;
@@ -23,17 +24,21 @@ import java.util.List;
 @Controller
 public class MainController {
 
+    private final UserService userService;
+    private final RecordService recordService;
+
     @Autowired
-    private UserService userService;
-    @Autowired
-    private RecordService recordService;
+    public MainController(UserService userService, RecordService recordService) {
+        this.userService = userService;
+        this.recordService = recordService;
+    }
 
     @GetMapping("/")
     public String getAll(Model model, Pageable pageable) {
         Page<User> userPage = userService.getAllUsers(pageable);
         PageWrapper<User> page = new PageWrapper<>(userPage, "/");
 
-        //пока для примера вывод на главной странице таблицы с общими суммами
+        //fixme: //пока для примера вывод на главной странице таблицы с общими суммами
         List<User> pageContent = page.getContent();
         List<UserDto> users = userService.getSumRecords(pageContent);
 
@@ -47,8 +52,21 @@ public class MainController {
         Long userID = Long.parseLong(id);
         User user = userService.findOneById(userID);
         model.addAttribute("user", user);
+        FilterFormDto filterFormDto = new FilterFormDto();
+        model.addAttribute("filterFormDto", filterFormDto);
 
-        List<Record> recordList = recordService.findRecordsByCriteria(userID);
+        List<Record> recordList = recordService.findRecordsByCriteria(userID, filterFormDto);
+        model.addAttribute("recordList", recordList);
+        return "views/info";
+    }
+
+    @PostMapping("/user/{id}")
+    public String getUserInfo(Model model, @PathVariable(name = "id") String id, @ModelAttribute FilterFormDto filterFormDto) {
+        Long userID = Long.parseLong(id);
+        User user = userService.findOneById(userID);
+        model.addAttribute("user", user);
+
+        List<Record> recordList = recordService.findRecordsByCriteria(userID, filterFormDto);
         model.addAttribute("recordList", recordList);
         return "views/info";
     }

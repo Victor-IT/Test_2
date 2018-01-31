@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: wrapper(~{::title},~{})">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="layout :: wrapper(~{::title},~{})">
 
 <title>Информация о пользователе</title>
 
@@ -7,7 +7,9 @@
     <table class="table table-bordered" th:object="${user}" border="1">
         <tbody>
         <tr>
-            <td align="center" colspan="2" width="100%" th:style="'font-weight:bold; text-align:center; vertical-align:middle;'" th:text="*{name}">UserName</td>
+            <td align="center" colspan="2" width="100%"
+                th:style="'font-weight:bold; text-align:center; vertical-align:middle;'" th:text="*{name}">UserName
+            </td>
             <td>
                 <a th:href="'/user/edit/' + *{id}">
                     <button class="btn btn-default">Редактировать</button>
@@ -17,6 +19,20 @@
                 <a th:href="'/user/delete/' + *{id}">
                     <button class="btn btn-danger">Удалить</button>
                 </a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <form th:object="${filterFormDto}" class="form-inline" th:action="@{/user/{id}(id=${user.id})}"
+                      method="post">
+                    <label for="formInputFrom1">Начало: </label>
+                    <input type="text" class="form-control" placeholder="dd-mm-yyy" id="formInputFrom1"
+                           th:field="*{startDate}"/>
+                    <label for="formInputTo1">Конец: </label>
+                    <input type="text" class="form-control" placeholder="dd-mm-yyy" id="formInputTo1"
+                           th:field="*{endDate}"/>
+                    <button type="submit" class="btn btn-primary">Найти</button>
+                </form>
             </td>
         </tr>
         <tr>

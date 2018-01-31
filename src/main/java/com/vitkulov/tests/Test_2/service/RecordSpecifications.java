@@ -23,6 +23,24 @@ final class RecordSpecifications {
         };
     }
 
+    static Specification<Record> dateFrom(LocalDate from) {
+        return new Specification<Record>() {
+            @Override
+            public Predicate toPredicate(Root<Record> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                return criteriaBuilder.greaterThanOrEqualTo(root.get("date"), from);
+            }
+        };
+    }
+
+    static Specification<Record> dateTo(LocalDate to) {
+        return new Specification<Record>() {
+            @Override
+            public Predicate toPredicate(Root<Record> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                return criteriaBuilder.lessThanOrEqualTo(root.get("date"), to);
+            }
+        };
+    }
+
     static Specification<Record> dateFromTo(LocalDate from, LocalDate to) {
         return new Specification<Record>() {
             @Override
