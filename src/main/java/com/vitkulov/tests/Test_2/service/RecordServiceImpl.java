@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static com.vitkulov.tests.Test_2.Application.LOGGER;
 import static com.vitkulov.tests.Test_2.service.RecordSpecifications.*;
 import static org.springframework.data.jpa.domain.Specifications.where;
 
@@ -28,18 +29,18 @@ public class RecordServiceImpl implements RecordService {
     public List<Record> findRecordsByCriteria(Long id, FilterFormDto filterFormDto) {
 
         Specification<Record> specification = hasUserId(id);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate start = null;
-        LocalDate end = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime start = null;
+        LocalDateTime end = null;
         try {
-            start = LocalDate.parse(filterFormDto.getStartDate(), formatter);
+            start = LocalDateTime.parse(filterFormDto.getStartDate(), formatter);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.info("Null StartDate formField");
         }
         try {
-            end = LocalDate.parse(filterFormDto.getEndDate(), formatter);
+            end = LocalDateTime.parse(filterFormDto.getEndDate(), formatter);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.info("Null EndDate formField");
         }
 
         if (start != null) {

@@ -26,10 +26,10 @@
                 <form th:object="${filterFormDto}" class="form-inline" th:action="@{/user/{id}(id=${user.id})}"
                       method="post">
                     <label for="formInputFrom1">Начало: </label>
-                    <input type="text" class="form-control" placeholder="dd-mm-yyy" id="formInputFrom1"
+                    <input type="text" class="form-control" placeholder="dd-mm-yyyy HH:mm" id="formInputFrom1"
                            th:field="*{startDate}"/>
                     <label for="formInputTo1">Конец: </label>
-                    <input type="text" class="form-control" placeholder="dd-mm-yyy" id="formInputTo1"
+                    <input type="text" class="form-control" placeholder="dd-mm-yyyy HH:mm" id="formInputTo1"
                            th:field="*{endDate}"/>
                     <button type="submit" class="btn btn-primary">Найти</button>
                 </form>

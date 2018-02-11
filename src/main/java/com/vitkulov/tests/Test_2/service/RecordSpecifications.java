@@ -7,7 +7,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 final class RecordSpecifications {
 
@@ -23,7 +23,7 @@ final class RecordSpecifications {
         };
     }
 
-    static Specification<Record> dateFrom(LocalDate from) {
+    static Specification<Record> dateFrom(LocalDateTime from) {
         return new Specification<Record>() {
             @Override
             public Predicate toPredicate(Root<Record> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
@@ -32,7 +32,7 @@ final class RecordSpecifications {
         };
     }
 
-    static Specification<Record> dateTo(LocalDate to) {
+    static Specification<Record> dateTo(LocalDateTime to) {
         return new Specification<Record>() {
             @Override
             public Predicate toPredicate(Root<Record> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
@@ -41,7 +41,7 @@ final class RecordSpecifications {
         };
     }
 
-    static Specification<Record> dateFromTo(LocalDate from, LocalDate to) {
+    static Specification<Record> dateFromTo(LocalDateTime from, LocalDateTime to) {
         return new Specification<Record>() {
             @Override
             public Predicate toPredicate(Root<Record> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
