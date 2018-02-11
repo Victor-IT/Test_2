@@ -8,7 +8,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static com.vitkulov.tests.Test_2.Application.LOGGER;
@@ -29,18 +28,17 @@ public class RecordServiceImpl implements RecordService {
     public List<Record> findRecordsByCriteria(Long id, FilterFormDto filterFormDto) {
 
         Specification<Record> specification = hasUserId(id);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime start = null;
         LocalDateTime end = null;
         try {
-            start = LocalDateTime.parse(filterFormDto.getStartDate(), formatter);
+            start = LocalDateTime.parse(filterFormDto.getStartDate());
         } catch (Exception e) {
-            LOGGER.info("Null StartDate formField");
+            LOGGER.info("Wrong StartDate formField");
         }
         try {
-            end = LocalDateTime.parse(filterFormDto.getEndDate(), formatter);
+            end = LocalDateTime.parse(filterFormDto.getEndDate());
         } catch (Exception e) {
-            LOGGER.info("Null EndDate formField");
+            LOGGER.info("Wrong EndDate formField");
         }
 
         if (start != null) {

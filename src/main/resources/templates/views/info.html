@@ -22,14 +22,14 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4">
+            <td align="center" colspan="4">
                 <form th:object="${filterFormDto}" class="form-inline" th:action="@{/user/{id}(id=${user.id})}"
                       method="post">
                     <label for="formInputFrom1">Начало: </label>
-                    <input type="text" class="form-control" placeholder="dd-mm-yyyy HH:mm" id="formInputFrom1"
+                    <input type="datetime-local" min="2017-04-01" max="2017-04-30" class="form-control" placeholder="dd-mm-yyyy HH:mm" id="formInputFrom1"
                            th:field="*{startDate}"/>
                     <label for="formInputTo1">Конец: </label>
-                    <input type="text" class="form-control" placeholder="dd-mm-yyyy HH:mm" id="formInputTo1"
+                    <input type="datetime-local" min="2017-04-01" max="2017-04-30" class="form-control" placeholder="dd-mm-yyyy HH:mm" id="formInputTo1"
                            th:field="*{endDate}"/>
                     <button type="submit" class="btn btn-primary">Найти</button>
                 </form>
