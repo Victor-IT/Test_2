@@ -4,6 +4,7 @@ import com.vitkulov.tests.Test_2.dto.UserDto;
 import com.vitkulov.tests.Test_2.model.Record;
 import com.vitkulov.tests.Test_2.model.User;
 import com.vitkulov.tests.Test_2.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,11 +16,13 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -45,8 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveNewUser(UserDto userDto) {
-        User user = new User();
-        user.setName(userDto.getName()); //TODO: нужен автоматический конвертер
+        User user = modelMapper.map(userDto, User.class);
         userRepository.save(user);
     }
 
@@ -65,9 +67,7 @@ public class UserServiceImpl implements UserService {
         for (User user : users) {
             Long uplink = 0L, downlink = 0L;
             Record sumRecord = new Record();
-            UserDto userDto = new UserDto();
-            userDto.setId(user.getId());
-            userDto.setName(user.getName());
+            UserDto userDto = modelMapper.map(user, UserDto.class);
 
             for (Record record : user.getRecordList()) {
                 uplink += record.getUplink();
