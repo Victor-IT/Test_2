@@ -25,6 +25,7 @@
         <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
         <thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
         <modelmapper.version>1.1.0</modelmapper.version>
+        <lombok.version>1.16.20</lombok.version>
     </properties>
 
     <dependencies>
@@ -65,6 +66,13 @@
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>${modelmapper.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

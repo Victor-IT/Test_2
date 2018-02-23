@@ -3,6 +3,7 @@ package com.vitkulov.tests.Test_2.service;
 import com.vitkulov.tests.Test_2.dto.FilterFormDto;
 import com.vitkulov.tests.Test_2.model.Record;
 import com.vitkulov.tests.Test_2.repository.RecordRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -10,10 +11,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.vitkulov.tests.Test_2.Application.LOGGER;
 import static com.vitkulov.tests.Test_2.service.RecordSpecifications.*;
 import static org.springframework.data.jpa.domain.Specifications.where;
 
+@Slf4j
 @Service
 public class RecordServiceImpl implements RecordService {
 
@@ -33,12 +34,12 @@ public class RecordServiceImpl implements RecordService {
         try {
             start = LocalDateTime.parse(filterFormDto.getStartDate());
         } catch (Exception e) {
-            LOGGER.info("Wrong StartDate formField");
+            log.info("Wrong StartDate formField");
         }
         try {
             end = LocalDateTime.parse(filterFormDto.getEndDate());
         } catch (Exception e) {
-            LOGGER.info("Wrong EndDate formField");
+            log.info("Wrong EndDate formField");
         }
 
         if (start != null) {
