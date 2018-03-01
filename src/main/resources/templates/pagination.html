@@ -7,40 +7,40 @@
         <ul class="pagination">
             <li th:class="${page.firstPage}?'disabled':''">
                 <span th:if='${page.firstPage}'>← First</span>
-                <a th:if="${not page.firstPage}" th:href="@{${page.url}(page=0,size=${page.size})}">← First</a>
+                <a th:if="${not page.firstPage}" th:href="@{${page.url}(page=0,size=${page.size},name=${name})}">← First</a>
             </li>
             <li th:class="${page.hasPreviousPage}? '' : 'disabled'">
                 <span th:if="${not page.hasPreviousPage}">«</span>
                 <a th:if="${page.hasPreviousPage}"
-                   th:href="@{${page.url}(page=${page.number - 2},size=${page.size})}"
+                   th:href="@{${page.url}(page=${page.number - 2},size=${page.size},name=${name})}"
                    title="Go to previous page">«</a>
             </li>
             <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''">
                 <span th:if="${item.current}" th:text="${item.number}">1</span>
                 <a th:if="${not item.current}"
-                   th:href="@{${page.url}(page=${item.number - 1},size=${page.size})}"><span
+                   th:href="@{${page.url}(page=${item.number - 1},size=${page.size},name=${name})}"><span
                         th:text="${item.number}">1</span></a>
             </li>
             <li th:class="${page.hasNextPage}? '' : 'disabled'">
                 <span th:if="${not page.hasNextPage}">»</span>
-                <a th:if="${page.hasNextPage}" th:href="@{${page.url}(page=${page.number},size=${page.size})}"
+                <a th:if="${page.hasNextPage}" th:href="@{${page.url}(page=${page.number},size=${page.size},name=${name})}"
                    title="Go to next page">»</a>
             </li>
             <li th:class="${page.lastPage}? 'disabled' : ''">
                 <span th:if="${page.lastPage}">Last →</span>
                 <a th:if="${not page.lastPage}"
-                   th:href="@{${page.url}(page=${page.totalPages - 1},size=${page.size})}">Last →</a>
+                   th:href="@{${page.url}(page=${page.totalPages - 1},size=${page.size},name=${name})}">Last →</a>
             </li>
         </ul>
     </div>
-    <div style="margin-top: 20px; float:right;" class="btn-group" role="group">
+    <div id="pageSizeSelector" style="margin-top: 20px; float:right;" class="btn-group" role="group">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false" th:text="'Размер списка: ' + ${page.size}"> Количество <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-            <li><a th:href="@{${page.url}(page=~{},size=5)}"><span>5</span></a></li>
-            <li><a th:href="@{${page.url}(page=~{},size=10)}"><span>10</span></a></li>
-            <li><a th:href="@{${page.url}(page=~{},size=20)}"><span>20</span></a></li>
+            <li><a th:href="@{${page.url}(page=~{},size=5,name=${name})}"><span>5</span></a></li>
+            <li><a th:href="@{${page.url}(page=~{},size=10,name=${name})}"><span>10</span></a></li>
+            <li><a th:href="@{${page.url}(page=~{},size=20,name=${name})}"><span>20</span></a></li>
         </ul>
     </div>
 

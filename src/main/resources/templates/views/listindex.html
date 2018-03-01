@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="layout :: wrapper(~{::title},~{})">
+
+<title>Список пользователей</title>
+
+<div id="content">
+    <div class="col-md-6">
+
+        <div class="form-inline">
+            <form class="form-inline" th:action="@{/user/find/}" method="get">
+                <input type="text" name="name" id="formInputName1" placeholder="Введите имя" th:value="${name}"
+                       class="form-control"/>
+                <button type="submit" class="btn btn-primary">Найти</button>
+                <a href="/user/new" style="float: right;">
+                    <button class="btn btn-primary" type="button">Создать нового</button>
+                </a>
+            </form>
+
+        </div>
+        <div class="form-group">
+            <label for="sel1"></label>
+            <select size="10" class="form-control"
+                    onchange="document.location=this.options[this.selectedIndex].value"
+                    id="sel1">
+                <option th:each="user : ${users}" th:value="'/user/' + ${user.id}" th:text="${user.name}">Ссылка на
+                    пользователя
+                </option>
+            </select>
+        </div>
+
+        <!-- Pagination Bar -->
+        <th:block th:replace="pagination :: paginationbar"/>
+    </div>
+</div>
+</html>

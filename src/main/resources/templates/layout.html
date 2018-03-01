@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="wrapper(title,links)">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:fragment="wrapper(title,links)">
 
 <head>
     <title th:replace="${title}">Title placeholder</title>
@@ -24,9 +24,7 @@
     <h1 th:include="${title}">H1 header</h1>
 
     <div class="row">
-        <div class="col-md-7">
-            <th:block th:replace="~{::#content}"> Content goes here</th:block>
-        </div>
+        <th:block th:replace="~{::#content}"> Content goes here</th:block>
     </div>
 </div>
 

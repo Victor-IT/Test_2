@@ -1,40 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: wrapper(~{::title},~{})">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" th:replace="layout :: wrapper(~{::title},~{})">
 
 <title>Список пользователей</title>
 
 <div id="content">
-    <!-- Pagination Bar -->
-    <th:block th:replace="pagination :: paginationbar"/>
+    <div class="col-md-7">
+        <!-- Pagination Bar -->
+        <th:block th:replace="pagination :: paginationbar"/>
 
-    <a href="/user/new">
-        <button class="btn btn-primary" type="button">Создать нового</button>
-    </a>
-    <table class="table table-hover table-bordered">
-        <thead>
-        <tr>
-            <th>№</th>
-            <th>Имя</th>
-            <th>Всего скачал</th>
-            <th>Всего загрузил</th>
-        </tr>
-        </thead>
-        <tr th:each="user : ${users}">
-            <td width="10%" th:text="${user.id}">1</td>
-            <td width="30%">
-                <a th:text="${user.name}" th:href="'/user/'+${user.id}" href="/user/1">Пользователь</a>
-            </td>
-            <td width="30%">
-                <span th:text="${user.record.getDownlink()}">Скачал</span>
-            </td>
-            <td width="30%">
-                <span th:text="${user.record.getUplink()}">Загрузил</span>
-            </td>
-        </tr>
-    </table>
+        <a href="/user/new">
+            <button class="btn btn-primary" type="button">Создать нового</button>
+        </a>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Имя</th>
+                <th>Всего скачал</th>
+                <th>Всего загрузил</th>
+            </tr>
+            </thead>
+            <tr th:each="user : ${users}">
+                <td width="10%" th:text="${user.id}">1</td>
+                <td width="30%">
+                    <a th:text="${user.name}" th:href="'/user/'+${user.id}" href="/user/1">Пользователь</a>
+                </td>
+                <td width="30%">
+                    <span th:text="${user.record.getDownlink()}">Скачал</span>
+                </td>
+                <td width="30%">
+                    <span th:text="${user.record.getUplink()}">Загрузил</span>
+                </td>
+            </tr>
+        </table>
 
-    <!-- Pagination Bar -->
-    <th:block th:replace="pagination :: paginationbar"/>
+        <!-- Pagination Bar -->
+        <th:block th:replace="pagination :: paginationbar"/>
+    </div>
 </div>
 
 </html>

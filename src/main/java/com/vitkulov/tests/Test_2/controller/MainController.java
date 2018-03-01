@@ -13,10 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -44,7 +41,22 @@ public class MainController {
 
         model.addAttribute("users", users);
         model.addAttribute("page", page);
-        return "views/index";
+//        return "views/index";
+        return "views/listindex";
+    }
+
+    @GetMapping("/user/find/")
+    public String getNextPage(Model model, Pageable pageable, @RequestParam(name = "name") String name) {
+        Page<User> userPage = userService.findByName(name, pageable);
+        PageWrapper<User> page = new PageWrapper<>(userPage, "/user/find/");
+
+        List<User> pageContent = page.getContent();
+        List<UserDto> users = userService.getSumRecords(pageContent);
+
+        model.addAttribute("users", users);
+        model.addAttribute("page", page);
+        model.addAttribute("name", name);
+        return "views/listindex";
     }
 
     @GetMapping("/user/{id}")
@@ -52,6 +64,7 @@ public class MainController {
         Long userID = Long.parseLong(id);
         User user = userService.findOneById(userID);
         model.addAttribute("user", user);
+
         FilterFormDto filterFormDto = new FilterFormDto();
         model.addAttribute("filterFormDto", filterFormDto);
 
