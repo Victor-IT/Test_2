@@ -9,6 +9,7 @@ import com.vitkulov.tests.Test_2.service.RecordService;
 import com.vitkulov.tests.Test_2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +42,8 @@ public class MainController {
 
         model.addAttribute("users", users);
         model.addAttribute("page", page);
-//        return "views/index";
-        return "views/listindex";
+        return "views/index";
+//        return "views/listindex";
     }
 
     @GetMapping("/user/find/")
@@ -59,8 +60,9 @@ public class MainController {
         return "views/listindex";
     }
 
+    //получение пользователя и добавление к модели формы фильтров
     @GetMapping("/user/{id}")
-    public String getUserInfo(Model model, @PathVariable(name = "id") String id) {
+    public String getUserInfo(Model model, Pageable pageable, @PathVariable(name = "id") String id) {
         Long userID = Long.parseLong(id);
         User user = userService.findOneById(userID);
         model.addAttribute("user", user);
@@ -68,19 +70,38 @@ public class MainController {
         FilterFormDto filterFormDto = new FilterFormDto();
         model.addAttribute("filterFormDto", filterFormDto);
 
-        List<Record> recordList = recordService.findRecordsByCriteria(userID, filterFormDto);
+        List<Record> records = recordService.findRecordsByCriteria(userID, filterFormDto);
+        int start = pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > records.size() ? records.size() : (start + pageable.getPageSize());
+
+        Page<Record> recordPage = new PageImpl<>(records.subList(start, end), pageable, records.size());
+        PageWrapper<Record> page = new PageWrapper<>(recordPage, "/user/" + id);
+        List<Record> recordList = page.getContent();
+
         model.addAttribute("recordList", recordList);
+        model.addAttribute("page", page);
         return "views/info";
     }
 
+    //получение пользователя по пришедшим данным в полях фильтра
     @PostMapping("/user/{id}")
-    public String getUserInfo(Model model, @PathVariable(name = "id") String id, @ModelAttribute FilterFormDto filterFormDto) {
+    public String getUserInfo(Model model, Pageable pageable, @PathVariable(name = "id") String id,
+                              @ModelAttribute FilterFormDto filterFormDto) {
+
         Long userID = Long.parseLong(id);
         User user = userService.findOneById(userID);
         model.addAttribute("user", user);
 
-        List<Record> recordList = recordService.findRecordsByCriteria(userID, filterFormDto);
+        List<Record> records = recordService.findRecordsByCriteria(userID, filterFormDto);
+        int start = pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > records.size() ? records.size() : (start + pageable.getPageSize());
+
+        Page<Record> recordPage = new PageImpl<>(records.subList(start, end), pageable, records.size());
+        PageWrapper<Record> page = new PageWrapper<>(recordPage, "/user/" + id);
+        List<Record> recordList = page.getContent();
+
         model.addAttribute("recordList", recordList);
+        model.addAttribute("page", page);
         return "views/info";
     }
 

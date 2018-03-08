@@ -4,7 +4,7 @@
 <title>Список пользователей</title>
 
 <div id="content">
-    <div class="col-md-6">
+    <div class="col-md-5">
 
         <div class="form-inline">
             <form class="form-inline" th:action="@{/user/find/}" method="get">
@@ -20,16 +20,66 @@
         <div class="form-group">
             <label for="sel1"></label>
             <select size="10" class="form-control"
-                    onchange="document.location=this.options[this.selectedIndex].value"
-                    id="sel1">
-                <option th:each="user : ${users}" th:value="'/user/' + ${user.id}" th:text="${user.name}">Ссылка на
-                    пользователя
+                    onchange="document.location=this.options[this.selectedIndex].value" id="sel1">
+                <option th:each="user : ${users}"
+                        th:value="'/user/' + ${user.id}"
+                        th:text="${user.name}">Ссылка на пользователя
                 </option>
             </select>
         </div>
 
         <!-- Pagination Bar -->
         <th:block th:replace="pagination :: paginationbar"/>
+    </div>
+
+    <div class="col-md-7">
+        <table class="table table-bordered" th:object="${user}" border="1">
+            <tbody>
+            <tr>
+                <td align="center" colspan="2" width="100%"
+                    th:style="'font-weight:bold; text-align:center; vertical-align:middle;'" th:text="*{name}">UserName
+                </td>
+                <td>
+                    <a th:href="'/user/edit/' + *{id}">
+                        <button class="btn btn-default">Редактировать</button>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="'/user/delete/' + *{id}">
+                        <button class="btn btn-danger">Удалить</button>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="4">
+                    <form th:object="${filterFormDto}" class="form-inline" th:action="@{/user/{id}(id=${user.id})}"
+                          method="post">
+                        <label for="formInputFrom1">Начало: </label>
+                        <input type="datetime-local" min="2017-04-01" max="2018-12-31" class="form-control"
+                               placeholder="dd-mm-yyyy HH:mm" id="formInputFrom1"
+                               th:field="*{startDate}"/>
+                        <label for="formInputTo1">Конец: </label>
+                        <input type="datetime-local" min="2017-04-01" max="2018-12-31" class="form-control"
+                               placeholder="dd-mm-yyyy HH:mm" id="formInputTo1"
+                               th:field="*{endDate}"/>
+                        <button type="submit" class="btn btn-primary">Найти</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <th>№</th>
+                <th>Дата</th>
+                <th>Скачал</th>
+                <th>Загрузил</th>
+            </tr>
+            <tr th:each="record : ${recordList}">
+                <td th:text="${record.getId()}">№</td>
+                <td th:text="${record.getDate()}">Дата</td>
+                <td th:text="${record.getDownlink()}">Скачал</td>
+                <td th:text="${record.getUplink()}">Загрузил</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </html>

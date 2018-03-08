@@ -38,8 +38,8 @@
                 aria-expanded="false" th:text="'Размер списка: ' + ${page.size}"> Количество <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-            <li><a th:href="@{${page.url}(page=~{},size=5,name=${name})}"><span>5</span></a></li>
             <li><a th:href="@{${page.url}(page=~{},size=10,name=${name})}"><span>10</span></a></li>
+            <li><a th:href="@{${page.url}(page=~{},size=15,name=${name})}"><span>15</span></a></li>
             <li><a th:href="@{${page.url}(page=~{},size=20,name=${name})}"><span>20</span></a></li>
         </ul>
     </div>
