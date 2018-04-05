@@ -7,22 +7,32 @@
     <div class="col-md-5">
 
         <div class="form-inline">
-            <form class="form-inline" th:action="@{/user/find/}" method="get">
+            <form id="searchUserForm" class="form-inline" th:action="@{/user/find/}" method="get">
                 <input type="text" name="name" id="formInputName1" placeholder="Введите имя" th:value="${name}"
                        class="form-control"/>
                 <button type="submit" class="btn btn-primary">Найти</button>
+                <button id="searchUserFormClearButton" type="button" class="btn btn-danger"
+                        th:classappend="${#strings.isEmpty(name)}?'hidden':''"
+                        onclick="clearSearch()">X</button>
                 <a href="/user/new" style="float: right;">
-                    <button class="btn btn-primary" type="button">Создать нового</button>
+                    <button type="button" class="btn btn-primary">Создать нового</button>
                 </a>
             </form>
 
         </div>
         <div class="form-group">
-            <label for="sel1"></label>
-            <select size="10" class="form-control"
+            <label for="userListSelection"></label>
+            <!--<select size="10" class="form-control"
                     onchange="document.location=this.options[this.selectedIndex].value" id="sel1">
                 <option th:each="user : ${users}"
                         th:value="'/user/' + ${user.id}"
+                        th:text="${user.name}">Ссылка на пользователя
+                </option>
+            </select>-->
+            <!--<select size="15" id="userListSelection" class="form-control" onchange="selectUser($(this).val())">-->
+            <select size="15" id="userListSelection" class="form-control" onchange="getUserRecords($(this).val())">
+                <option th:each="user : ${users}"
+                        th:value="${user.id}"
                         th:text="${user.name}">Ссылка на пользователя
                 </option>
             </select>
@@ -33,26 +43,26 @@
     </div>
 
     <div class="col-md-7">
-        <table class="table table-bordered" th:object="${user}" border="1">
+        <table id="recordTable" class="table table-bordered" border="1">
             <tbody>
             <tr>
                 <td align="center" colspan="2" width="100%"
-                    th:style="'font-weight:bold; text-align:center; vertical-align:middle;'" th:text="*{name}">UserName
+                    th:style="'font-weight:bold; text-align:center; vertical-align:middle;'">UserName
                 </td>
                 <td>
-                    <a th:href="'/user/edit/' + *{id}">
+                    <a th:href="'/user/edit/'">
                         <button class="btn btn-default">Редактировать</button>
                     </a>
                 </td>
                 <td>
-                    <a th:href="'/user/delete/' + *{id}">
+                    <a th:href="'/user/delete/'">
                         <button class="btn btn-danger">Удалить</button>
                     </a>
                 </td>
             </tr>
             <tr>
                 <td align="center" colspan="4">
-                    <form th:object="${filterFormDto}" class="form-inline" th:action="@{/user/{id}(id=${user.id})}"
+                    <form th:object="${filterFormDto}" class="form-inline" th:action="@{/user/{id}(id=${1})}"
                           method="post">
                         <label for="formInputFrom1">Начало: </label>
                         <input type="datetime-local" min="2017-04-01" max="2018-12-31" class="form-control"

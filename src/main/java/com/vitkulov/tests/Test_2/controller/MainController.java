@@ -40,10 +40,13 @@ public class MainController {
         List<User> pageContent = page.getContent();
         List<UserDto> users = userService.getSumRecords(pageContent);
 
+        FilterFormDto filterFormDto = new FilterFormDto();
+        model.addAttribute("filterFormDto", filterFormDto);
+
         model.addAttribute("users", users);
         model.addAttribute("page", page);
-        return "views/index";
-//        return "views/listindex";
+//        return "views/index";
+        return "views/listindex";
     }
 
     @GetMapping("/user/find/")
@@ -53,6 +56,9 @@ public class MainController {
 
         List<User> pageContent = page.getContent();
         List<UserDto> users = userService.getSumRecords(pageContent);
+
+        FilterFormDto filterFormDto = new FilterFormDto();
+        model.addAttribute("filterFormDto", filterFormDto);
 
         model.addAttribute("users", users);
         model.addAttribute("page", page);
@@ -80,7 +86,8 @@ public class MainController {
 
         model.addAttribute("recordList", recordList);
         model.addAttribute("page", page);
-        return "views/info";
+//        return "views/info";
+        return "views/innerinfo";
     }
 
     //получение пользователя по пришедшим данным в полях фильтра
