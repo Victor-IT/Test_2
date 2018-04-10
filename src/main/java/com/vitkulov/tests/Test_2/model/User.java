@@ -3,6 +3,7 @@ package com.vitkulov.tests.Test_2.model;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
+@ToString(exclude = "recordList")
 public class User {
 
     @Id

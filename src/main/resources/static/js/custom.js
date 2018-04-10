@@ -1,6 +1,6 @@
 function clearSearch() {
-    var formInput = $('#formInputName1');
-    var clearButton = $('#searchUserFormClearButton');
+    var formInput = $('#searchUFInputName');
+    var clearButton = $('#searchUFClearButton');
 
     if (formInput.val() === '') {
         clearButton.addClass('hidden');
@@ -20,4 +20,21 @@ function getUserRecords(id) {
         .done(function (result) {
             $('#recordTable').html(result);
         });
+}
+
+function getRecordsInterval(id) {
+    var str = $('#recordForm').serialize();
+    alert(str + id);
+
+    $.ajax({
+        url: '/user/' + id,
+        method: 'POST',
+        data: str,
+        dataType: 'html'
+    })
+        .done(function (result) {
+            $('#recordTable').html(result);
+        });
+
+    return false;
 }

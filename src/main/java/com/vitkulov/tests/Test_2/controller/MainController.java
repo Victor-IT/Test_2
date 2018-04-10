@@ -109,7 +109,8 @@ public class MainController {
 
         model.addAttribute("recordList", recordList);
         model.addAttribute("page", page);
-        return "views/info";
+//        return "views/info";
+        return "views/innerinfo";
     }
 
     @PostMapping("/user/new")
