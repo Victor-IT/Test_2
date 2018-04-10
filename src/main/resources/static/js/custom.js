@@ -35,6 +35,4 @@ function getRecordsInterval(id) {
         .done(function (result) {
             $('#recordTable').html(result);
         });
-
-    return false;
 }

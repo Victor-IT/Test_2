@@ -43,12 +43,12 @@
                 </td>
                 <td>
                     <a th:href="'/user/edit/'">
-                        <button class="btn btn-default">Редактировать</button>
+                        <button disabled class="btn btn-default">Редактировать</button>
                     </a>
                 </td>
                 <td>
                     <a th:href="'/user/delete/'">
-                        <button class="btn btn-danger">Удалить</button>
+                        <button disabled class="btn btn-danger">Удалить</button>
                     </a>
                 </td>
             </tr>
@@ -57,14 +57,14 @@
                     <form th:object="${filterFormDto}" class="form-inline" th:action="@{/user/{id}(id=${1})}"
                           method="post">
                         <label for="formInputFrom1">Начало: </label>
-                        <input type="datetime-local" min="2017-04-01" max="2018-12-31" class="form-control"
+                        <input disabled type="datetime-local" min="2017-04-01" max="2018-12-31" class="form-control"
                                placeholder="dd-mm-yyyy HH:mm" id="formInputFrom1"
                                th:field="*{startDate}"/>
                         <label for="formInputTo1">Конец: </label>
-                        <input type="datetime-local" min="2017-04-01" max="2018-12-31" class="form-control"
+                        <input disabled type="datetime-local" min="2017-04-01" max="2018-12-31" class="form-control"
                                placeholder="dd-mm-yyyy HH:mm" id="formInputTo1"
                                th:field="*{endDate}"/>
-                        <button type="submit" class="btn btn-primary">Найти</button>
+                        <button disabled type="submit" class="btn btn-primary">Найти</button>
                     </form>
                 </td>
             </tr>

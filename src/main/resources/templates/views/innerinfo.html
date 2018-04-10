@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<div id="userID" th:text="${user.id}">id</div>
+<div hidden id="userID" th:text="${user.id}">id</div>
 <table class="table table-bordered" th:object="${user}" border="1">
     <tbody>
     <tr>
@@ -21,8 +21,7 @@
     </tr>
     <tr>
         <td align="center" colspan="4">
-            <form id="recordForm" th:object="${filterFormDto}" class="form-inline"
-                  onsubmit="getRecordsInterval($('#userID').text())">
+            <form id="recordForm" th:object="${filterFormDto}" class="form-inline">
                 <label for="recordFInputFrom">Начало: </label>
                 <input id="recordFInputFrom" type="datetime-local" min="2017-04-01" max="2018-12-31"
                        class="form-control" placeholder="dd-mm-yyyy HH:mm"
@@ -31,7 +30,8 @@
                 <input id="recordFInputTo" type="datetime-local" min="2017-04-01" max="2018-12-31"
                        class="form-control" placeholder="dd-mm-yyyy HH:mm"
                        th:field="*{endDate}"/>
-                <button type="submit" class="btn btn-primary">Найти</button>
+                <button type="button" class="btn btn-primary" onclick="getRecordsInterval($('#userID').text())">Найти
+                </button>
             </form>
         </td>
     </tr>
