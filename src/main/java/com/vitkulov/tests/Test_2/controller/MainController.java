@@ -51,6 +51,9 @@ public class MainController {
 
     @GetMapping("/user/find/")
     public String getNextPage(Model model, Pageable pageable, @RequestParam(name = "name") String name) {
+
+        if (name.isEmpty()) return "redirect:/";
+
         Page<User> userPage = userService.findByName(name, pageable);
         PageWrapper<User> page = new PageWrapper<>(userPage, "/user/find/");
 

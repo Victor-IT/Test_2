@@ -18,13 +18,13 @@ function getUserRecords(id) {
         dataType: 'html'
     })
         .done(function (result) {
-            $('#recordTable').html(result);
+            $('#recordDiv').html(result);
         });
 }
 
-function getRecordsInterval(id) {
+function getRecordsInterval() {
     var str = $('#recordForm').serialize();
-    alert(str + id);
+    var id = $('#recordDiv').find('#userID').text();
 
     $.ajax({
         url: '/user/' + id,
@@ -33,6 +33,15 @@ function getRecordsInterval(id) {
         dataType: 'html'
     })
         .done(function (result) {
-            $('#recordTable').html(result);
+            $('#recordDiv').html(result);
         });
 }
+
+/*$(document).ready(function () {
+    var recordDiv = $(this).find('#recordDiv');
+    recordDiv.on('click', '#recordFButton', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        getRecordsInterval();
+    });
+});*/

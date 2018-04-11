@@ -10,7 +10,7 @@
             <form id="searchUserForm" class="form-inline" th:action="@{/user/find/}" method="get">
                 <input type="text" name="name" id="searchUFInputName" placeholder="Введите имя" th:value="${name}"
                        class="form-control"/>
-                <button type="submit" class="btn btn-primary">Найти</button>
+                <button id="searchUFFindButton" type="submit" class="btn btn-primary">Найти</button>
                 <button id="searchUFClearButton" type="button" class="btn btn-danger"
                         th:classappend="${#strings.isEmpty(name)}?'hidden':''"
                         onclick="clearSearch()">X
@@ -34,8 +34,8 @@
         <th:block th:replace="pagination :: paginationbar"/>
     </div>
 
-    <div class="col-md-7">
-        <table id="recordTable" class="table table-bordered" border="1">
+    <div id="recordDiv" class="col-md-7">
+        <table class="table table-bordered" border="1">
             <tbody>
             <tr>
                 <td align="center" colspan="2" width="100%"
@@ -57,11 +57,11 @@
                     <form th:object="${filterFormDto}" class="form-inline" th:action="@{/user/{id}(id=${1})}"
                           method="post">
                         <label for="formInputFrom1">Начало: </label>
-                        <input disabled type="datetime-local" min="2017-04-01" max="2018-12-31" class="form-control"
+                        <input disabled type="datetime-local" min="2017-01-01T00:00" max="2018-12-31T23:59" class="form-control"
                                placeholder="dd-mm-yyyy HH:mm" id="formInputFrom1"
                                th:field="*{startDate}"/>
                         <label for="formInputTo1">Конец: </label>
-                        <input disabled type="datetime-local" min="2017-04-01" max="2018-12-31" class="form-control"
+                        <input disabled type="datetime-local" min="2017-01-01T00:00" max="2018-12-31T23:59" class="form-control"
                                placeholder="dd-mm-yyyy HH:mm" id="formInputTo1"
                                th:field="*{endDate}"/>
                         <button disabled type="submit" class="btn btn-primary">Найти</button>
@@ -73,12 +73,6 @@
                 <th>Дата</th>
                 <th>Скачал</th>
                 <th>Загрузил</th>
-            </tr>
-            <tr th:each="record : ${recordList}">
-                <td th:text="${record.getId()}">№</td>
-                <td th:text="${record.getDate()}">Дата</td>
-                <td th:text="${record.getDownlink()}">Скачал</td>
-                <td th:text="${record.getUplink()}">Загрузил</td>
             </tr>
             </tbody>
         </table>
