@@ -20,7 +20,7 @@
                 </a>
             </form>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="margin-bottom: 23px;">
             <label for="userListSelection"></label>
             <select size="15" id="userListSelection" class="form-control" onchange="getUserRecords($(this).val())">
                 <option th:each="user : ${users}"
@@ -57,11 +57,13 @@
                     <form th:object="${filterFormDto}" class="form-inline" th:action="@{/user/{id}(id=${1})}"
                           method="post">
                         <label for="formInputFrom1">Начало: </label>
-                        <input disabled type="datetime-local" min="2017-01-01T00:00" max="2018-12-31T23:59" class="form-control"
+                        <input disabled type="datetime-local" min="2017-01-01T00:00" max="2018-12-31T23:59"
+                               class="form-control"
                                placeholder="dd-mm-yyyy HH:mm" id="formInputFrom1"
                                th:field="*{startDate}"/>
                         <label for="formInputTo1">Конец: </label>
-                        <input disabled type="datetime-local" min="2017-01-01T00:00" max="2018-12-31T23:59" class="form-control"
+                        <input disabled type="datetime-local" min="2017-01-01T00:00" max="2018-12-31T23:59"
+                               class="form-control"
                                placeholder="dd-mm-yyyy HH:mm" id="formInputTo1"
                                th:field="*{endDate}"/>
                         <button disabled type="submit" class="btn btn-primary">Найти</button>

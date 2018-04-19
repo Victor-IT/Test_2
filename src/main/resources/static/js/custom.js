@@ -22,9 +22,13 @@ function getUserRecords(id) {
         });
 }
 
-function getRecordsInterval() {
+function getRecordsInterval(page, size) {
     var str = $('#recordForm').serialize();
     var id = $('#recordDiv').find('#userID').text();
+
+    if (page !== undefined && size !== undefined) {
+        str += "&page=" + page + "&size=" + size;
+    }
 
     $.ajax({
         url: '/user/' + id,

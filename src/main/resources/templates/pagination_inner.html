@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<!-- Pagination Bar -->
+<div th:fragment='paginationbar'>
+    <div class="btn-group" role="group">
+        <ul class="pagination">
+            <li th:class="${page.firstPage}?'disabled':''" style="display:inline">
+                <span th:if='${page.firstPage}'>← First</span>
+                <a th:if="${not page.firstPage}" href="javascript:void(0)"
+                   th:onclick="'getRecordsInterval(' + 0 + ', ' + ${page.size} + ')'">← First</a>
+            </li>
+            <li th:class="${page.hasPreviousPage}? '' : 'disabled'" style="display:inline">
+                <span th:if="${not page.hasPreviousPage}">«</span>
+                <a th:if="${page.hasPreviousPage}" href="javascript:void(0)"
+                   th:onclick="'getRecordsInterval(' + ${page.number - 2} + ', ' + ${page.size} + ')'"
+                   title="Go to previous page">«</a>
+            </li>
+            <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''" style="display:inline">
+                <span th:if="${item.current}" th:text="${item.number}">1</span>
+                <a th:if="${not item.current}" href="javascript:void(0)"
+                   th:onclick="'getRecordsInterval(' + ${item.number - 1} + ', ' + ${page.size} + ')'">
+                    <span th:text="${item.number}">1</span></a>
+            </li>
+            <li th:class="${page.hasNextPage}? '' : 'disabled'" style="display:inline">
+                <span th:if="${not page.hasNextPage}">»</span>
+                <a th:if="${page.hasNextPage}" href="javascript:void(0)"
+                   th:onclick="'getRecordsInterval(' + ${page.number} + ', ' + ${page.size} + ')'"
+                   title="Go to next page">»</a>
+            </li>
+            <li th:class="${page.lastPage}? 'disabled' : ''" style="display:inline">
+                <span th:if="${page.lastPage}">Last →</span>
+                <a th:if="${not page.lastPage}" href="javascript:void(0)"
+                   th:onclick="'getRecordsInterval(' + ${page.totalPages - 1} + ', ' + ${page.size} + ')'">Last →</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+</html>
