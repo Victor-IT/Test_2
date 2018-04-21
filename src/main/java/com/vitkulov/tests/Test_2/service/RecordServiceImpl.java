@@ -34,12 +34,12 @@ public class RecordServiceImpl implements RecordService {
         try {
             start = LocalDateTime.parse(filterFormDto.getStartDate());
         } catch (Exception e) {
-            log.info("Wrong StartDate formField");
+            log.info("Wrong or empty StartDate formField");
         }
         try {
             end = LocalDateTime.parse(filterFormDto.getEndDate());
         } catch (Exception e) {
-            log.info("Wrong EndDate formField");
+            log.info("Wrong or empty EndDate formField");
         }
 
         if (start != null) {

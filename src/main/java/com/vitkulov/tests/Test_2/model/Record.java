@@ -1,6 +1,9 @@
 package com.vitkulov.tests.Test_2.model;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,8 +18,6 @@ public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Getter(AccessLevel.NONE)
     private LocalDateTime date;
     private Long uplink;
     private Long downlink;
@@ -42,7 +43,7 @@ public class Record {
         this.user = user;
     }
 
-    public String getDate() {
+    public String getFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy / HH:mm:ss");
         return date.format(formatter);
     }

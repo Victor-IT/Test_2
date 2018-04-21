@@ -6,6 +6,8 @@ import com.vitkulov.tests.Test_2.validation.Name;
 import lombok.Data;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Data
 @ToString(of="name")
 public class UserDto {
@@ -14,6 +16,8 @@ public class UserDto {
     @Name
     private String name;
     private Record record;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     public UserDto() {
     }

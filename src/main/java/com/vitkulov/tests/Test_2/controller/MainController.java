@@ -1,5 +1,6 @@
 package com.vitkulov.tests.Test_2.controller;
 
+import com.vitkulov.tests.Test_2.dto.BitsDto;
 import com.vitkulov.tests.Test_2.dto.FilterFormDto;
 import com.vitkulov.tests.Test_2.dto.PageWrapper;
 import com.vitkulov.tests.Test_2.dto.UserDto;
@@ -110,8 +111,11 @@ public class MainController {
         PageWrapper<Record> page = new PageWrapper<>(recordPage, "/user/" + id);
         List<Record> recordList = page.getContent();
 
+        BitsDto bits = userService.getUserBits(user, filterFormDto);
+
         model.addAttribute("recordList", recordList);
         model.addAttribute("page", page);
+        model.addAttribute("bits", bits);
 //        return "views/info";
         return "views/innerinfo";
     }

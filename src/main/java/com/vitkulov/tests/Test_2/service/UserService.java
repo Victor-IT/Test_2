@@ -1,5 +1,7 @@
 package com.vitkulov.tests.Test_2.service;
 
+import com.vitkulov.tests.Test_2.dto.BitsDto;
+import com.vitkulov.tests.Test_2.dto.FilterFormDto;
 import com.vitkulov.tests.Test_2.dto.UserDto;
 import com.vitkulov.tests.Test_2.model.User;
 import org.springframework.data.domain.Page;
@@ -23,4 +25,8 @@ public interface UserService {
     void updateUser(UserDto userDto);
 
     List<UserDto> getSumRecords(List<User> user);
+
+    UserDto getSumOfUser(User user);
+
+    BitsDto getUserBits(User user, FilterFormDto filterFormDto);
 }

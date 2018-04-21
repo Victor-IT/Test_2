@@ -31,10 +31,20 @@
                 <input id="recordFInputTo" type="datetime-local" min="2017-01-01T00:00" max="2018-12-31T23:59"
                        class="form-control" placeholder="dd-mm-yyyy HH:mm"
                        th:field="*{endDate}"/>
-                <button id="recordFButton" type="button" class="btn btn-primary" onclick="getRecordsInterval()">Найти</button>
+                <button id="recordFButton" type="button" class="btn btn-primary" onclick="getRecordsInterval()">Найти
+                </button>
             </form>
         </td>
     </tr>
+
+    <tr th:object="${bits}">
+        <td align="center" colspan="4">
+            Объём скаченного за указанный период: <span id="total-download" th:text="*{downlink}">0</span> <br/>
+            Объём загруженного за указанный период: <span id="total-upload" th:text="*{uplink}">0</span> <br/>
+            Общий объем для указанного промежутка: <span id="total-speed" th:text="(*{downlink} + *{uplink})'">0</span>
+        </td>
+    </tr>
+
     <tr>
         <th>№</th>
         <th>Дата</th>
@@ -43,7 +53,7 @@
     </tr>
     <tr th:each="record : ${recordList}">
         <td th:text="${record.getId()}">№</td>
-        <td th:text="${record.getDate()}">Дата</td>
+        <td th:text="${record.getFormattedDate()}">Дата</td>
         <td th:text="${record.getDownlink()}">Скачал</td>
         <td th:text="${record.getUplink()}">Загрузил</td>
     </tr>
