@@ -31,7 +31,8 @@
                 <input id="recordFInputTo" type="datetime-local" min="2017-01-01T00:00" max="2018-12-31T23:59"
                        class="form-control" placeholder="dd-mm-yyyy HH:mm"
                        th:field="*{endDate}"/>
-                <button id="recordFButton" type="button" class="btn btn-primary" onclick="getRecordsInterval()">Найти
+                <button id="recordFButton" type="button" class="btn btn-primary"
+                        th:onclick="'getRecordsInterval()'">Найти
                 </button>
             </form>
         </td>
@@ -39,9 +40,13 @@
 
     <tr th:object="${bits}">
         <td align="center" colspan="4">
-            Объём скаченного за указанный период: <span id="total-download" th:text="*{downlink}">0</span> <br/>
-            Объём загруженного за указанный период: <span id="total-upload" th:text="*{uplink}">0</span> <br/>
-            Общий объем для указанного промежутка: <span id="total-speed" th:text="(*{downlink} + *{uplink})'">0</span>
+            Объём скаченного за указанный период: <span th:text="*{downlink}">0</span><br/>
+            Объём загруженного за указанный период: <span th:text="*{uplink}">0</span><br/>
+            Общий объем для указанного промежутка: <span th:text="(*{downlink} + *{uplink})">0</span><br/>
+            Длительность промежутка: <strong id="duration" th:text="*{duration}"
+                                           th:onclick="'getDuration(' + *{duration} + ')'">0</strong><br/>
+            Пропускная способность для указанного промежутка (бит/сек): <span
+                th:text="(*{downlink} + *{uplink}) / *{duration}">0</span>
         </td>
     </tr>
 

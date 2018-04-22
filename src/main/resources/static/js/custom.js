@@ -41,6 +41,28 @@ function getRecordsInterval(page, size) {
         });
 }
 
+function getDuration(duration) {
+
+    var seconds = parseInt(duration % 60)
+        , minutes = parseInt((duration / 60) % 60)
+        , hours = parseInt((duration / (60 * 60)) % 24)
+        , days = parseInt((duration / (60 * 60 * 24))
+    );
+
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    $('#duration').text(
+        days + " дней "
+        + hours + " часов "
+        + minutes + " минут "
+        + seconds + " секунд "
+    );
+}
+
+
+
 /*$(document).ready(function () {
     var recordDiv = $(this).find('#recordDiv');
     recordDiv.on('click', '#recordFButton', function (event) {

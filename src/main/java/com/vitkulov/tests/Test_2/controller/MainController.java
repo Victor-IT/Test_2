@@ -88,8 +88,11 @@ public class MainController {
         PageWrapper<Record> page = new PageWrapper<>(recordPage, "/user/" + id);
         List<Record> recordList = page.getContent();
 
+        BitsDto bits = userService.getUserBits(user, filterFormDto);
+
         model.addAttribute("recordList", recordList);
         model.addAttribute("page", page);
+        model.addAttribute("bits", bits);
 //        return "views/info";
         return "views/innerinfo";
     }

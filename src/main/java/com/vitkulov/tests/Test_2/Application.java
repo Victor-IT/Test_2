@@ -22,9 +22,10 @@ public class Application {
     public CommandLineRunner init(UserRepository userRepository) {
         return strings -> {
             LocalDateTime date = LocalDateTime.now();
-            for (int i = 1; i <= 100; i++) {
+
+            for (int i = 1; i < 101; i++) {
                 User user = new User("Пользователь " + i);
-                for (int j = 1; j <= 10; j++) {
+                for (int j = 0; j < 10; j++) {
                     user.addRecord(new Record(date.plusDays(j), 1024L, 2048L, user));
                     user.addRecord(new Record(date.plusDays(j), 512L, 1024L, user));
                 }
