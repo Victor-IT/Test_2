@@ -37,16 +37,13 @@ public class MainController {
         Page<User> userPage = userService.getAllUsers(pageable);
         PageWrapper<User> page = new PageWrapper<>(userPage, "/");
 
-        //fixme: //пока для примера вывод на главной странице таблицы с общими суммами
         List<User> pageContent = page.getContent();
         List<UserDto> users = userService.getSumRecords(pageContent);
 
         FilterFormDto filterFormDto = new FilterFormDto();
         model.addAttribute("filterFormDto", filterFormDto);
-
         model.addAttribute("users", users);
         model.addAttribute("page", page);
-//        return "views/index";
         return "views/listindex";
     }
 
@@ -90,10 +87,9 @@ public class MainController {
 
         BitsDto bits = userService.getUserBits(user, filterFormDto);
 
-        model.addAttribute("recordList", recordList);
+        model.addAttribute("recordList", recordList); // todo: подумать как вести для записей каждого пользователя отдельную нумерацию
         model.addAttribute("page", page);
         model.addAttribute("bits", bits);
-//        return "views/info";
         return "views/innerinfo";
     }
 
@@ -119,7 +115,6 @@ public class MainController {
         model.addAttribute("recordList", recordList);
         model.addAttribute("page", page);
         model.addAttribute("bits", bits);
-//        return "views/info";
         return "views/innerinfo";
     }
 

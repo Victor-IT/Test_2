@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = modelMapper.map(user, UserDto.class);
         Record sumRecord = new Record();
         Long uplink = 0L, downlink = 0L;
-//        LocalDateTime startDate = LocalDateTime.of(1970, Month.JANUARY, 1, 0, 0,0);
+
         LocalDateTime startDate = LocalDateTime.now();
         LocalDateTime endDate = LocalDateTime.now();
 

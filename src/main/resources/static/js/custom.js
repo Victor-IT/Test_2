@@ -19,6 +19,9 @@ function getUserRecords(id) {
     })
         .done(function (result) {
             $('#recordDiv').html(result);
+
+            var duration = $('#duration').text();
+            getDuration(duration);
         });
 }
 
@@ -38,6 +41,9 @@ function getRecordsInterval(page, size) {
     })
         .done(function (result) {
             $('#recordDiv').html(result);
+
+            var duration = $('#duration').text();
+            getDuration(duration);
         });
 }
 
@@ -60,8 +66,6 @@ function getDuration(duration) {
         + seconds + " секунд "
     );
 }
-
-
 
 /*$(document).ready(function () {
     var recordDiv = $(this).find('#recordDiv');
